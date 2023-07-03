@@ -81,19 +81,19 @@ if [ "${build_type}" != "Release" ]; then
         if [ -f "${so_file_release}" ]; then
             sudo rm -f --preserve-root=all "${so_file_release}"
         fi
-        sudo ln -s "${so_file}" "${so_file_release}"
+        ln -s "${so_file}" "${so_file_release}"
     fi
 
     if  [ -f "${so_file_unstable}" ]; then
         if [ -f "${so_file_unstable_release}" ]; then
             sudo rm -f --preserve-root=all "${so_file_unstable_release}"
         fi
-        sudo ln -s "${so_file_unstable}" "${so_file_unstable_release}"
+        ln -s "${so_file_unstable}" "${so_file_unstable_release}"
     fi
 
     cd -
 fi
-sudo make -C "${build_dir}" -j "${illixr_nproc}" install
-sudo ln -s /usr/local/lib/${so_file} /usr/local/lib/libgtsam.so 
+make -C "${build_dir}" -j "${illixr_nproc}" install
+ln -s /usr/local/lib/${so_file} /usr/local/lib/libgtsam.so 
 ## Log
 log_dependency "${dep_name}" "${deps_log_dir}" "${src_dir}" "${dep_ver}"
